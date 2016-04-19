@@ -5,10 +5,14 @@
  */
 package dk.deothan.hibernatetest.entities;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -21,6 +25,9 @@ public class Album {
     private int id;
     @Column(name = "albumname")
     private String name;
+    @OneToMany
+    @Cascade(value=CascadeType.ALL)
+    private List<Artist> artists;        
     
     public Album(String name){
         this.name = name;        
@@ -34,6 +41,14 @@ public class Album {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public List<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
     }
 
     public String getName() {
